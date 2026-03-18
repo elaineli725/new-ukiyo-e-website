@@ -3,106 +3,603 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Floating World | 江户绮梦</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>月百姿｜月冈芳年笔下的月夜人间</title>
+    <meta
+      name="description"
+      content="《月百姿》数字展览网站：以时间线为核心浏览方式，观看月冈芳年笔下逐步展开的月夜人间。"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ink: '#090b11',
+              moon: '#f3f1eb',
+              mist: '#a3acbf',
+              haze: '#4b5670',
+              gold: '#9d8457',
+              lacquer: '#131720',
+              crimson: '#6f2b35',
+              paper: '#d9d0be',
+            },
+            fontFamily: {
+              serif: ['"Noto Serif SC"', '"Songti SC"', '"STSong"', 'serif'],
+              sans: ['"Inter"', '"PingFang SC"', '"Microsoft YaHei"', 'sans-serif'],
+            },
+            boxShadow: {
+              moon: '0 20px 60px rgba(8, 11, 20, 0.35)',
+              line: '0 0 0 1px rgba(217, 208, 190, 0.12)',
+            },
+            backgroundImage: {
+              grain:
+                'radial-gradient(circle at top, rgba(255,255,255,0.08), transparent 40%), linear-gradient(140deg, rgba(163,172,191,0.12), rgba(9,11,17,0.05) 40%, rgba(111,43,53,0.08) 100%)',
+              moonGlow:
+                'radial-gradient(circle at 50% 18%, rgba(243,241,235,0.18), transparent 20%), radial-gradient(circle at 72% 22%, rgba(163,172,191,0.16), transparent 18%), linear-gradient(180deg, rgba(9,11,17,0.96) 0%, rgba(12,16,24,0.95) 38%, rgba(16,21,32,0.98) 100%)',
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background:
+          radial-gradient(circle at top, rgba(243, 241, 235, 0.06), transparent 24%),
+          linear-gradient(180deg, #090b11 0%, #0d1119 45%, #090b11 100%);
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.12;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+        background-size: 160px 160px;
+        mask-image: linear-gradient(180deg, black, transparent 85%);
+      }
+
+      .paper-texture::before,
+      .paper-texture::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+      }
+
+      .paper-texture::before {
+        opacity: 0.14;
+        background-image:
+          radial-gradient(circle at 15% 18%, rgba(243, 241, 235, 0.18), transparent 28%),
+          radial-gradient(circle at 80% 25%, rgba(163, 172, 191, 0.12), transparent 22%),
+          radial-gradient(circle at 50% 85%, rgba(157, 132, 87, 0.08), transparent 26%);
+      }
+
+      .paper-texture::after {
+        opacity: 0.12;
+        mix-blend-mode: screen;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.35'%3E%3Ccircle cx='15' cy='18' r='1'/%3E%3Ccircle cx='74' cy='58' r='1'/%3E%3Ccircle cx='140' cy='42' r='1'/%3E%3Ccircle cx='111' cy='128' r='1'/%3E%3Ccircle cx='38' cy='120' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      }
+
+      .timeline-track::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 34px;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(163, 172, 191, 0.1), rgba(243, 241, 235, 0.35), rgba(163, 172, 191, 0.1));
+      }
+
+      @media (max-width: 767px) {
+        .timeline-track::before {
+          left: 18px;
+          right: auto;
+          top: 0;
+          bottom: 0;
+          width: 1px;
+          height: auto;
+          background: linear-gradient(180deg, rgba(163, 172, 191, 0.1), rgba(243, 241, 235, 0.35), rgba(163, 172, 191, 0.1));
+        }
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 900ms ease, transform 900ms ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
   </head>
-  <body>
-    <header class="site-header overlay-header">
-      <div class="container nav-wrap">
-        <a class="brand" href="index.html">江户绮梦</a>
-        <nav class="main-nav" aria-label="主导航">
-          <a href="index.html" aria-current="page">首页</a>
-          <a href="history.html">往事·历史</a>
-          <a href="figures.html">美人·才子·英雄</a>
-          <a href="myths.html">神话·妖鬼</a>
-          <a href="landscape.html">浮世·风景</a>
-          <a href="about.html">关于</a>
-        </nav>
-      </div>
-    </header>
+  <body class="font-sans text-moon antialiased selection:bg-gold/30 selection:text-moon">
+    <div id="root"></div>
 
-    <main>
-      <section class="hero-screen">
-        <div class="hero-mask"></div>
-        <div class="container hero-inner">
-          <h1>Floating World</h1>
-          <p class="hero-subtitle">Where beauty lingers, seasons drift, and the city becomes a dream.</p>
-          <a class="btn-primary" href="#through-world">Begin Wandering</a>
-        </div>
-      </section>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      const { useEffect, useMemo, useRef, useState } = React;
 
-      <section id="through-world" class="section light-paper">
-        <div class="container">
-          <div class="section-heading">
-            <h2>Through the Painted World</h2>
-            <p>几重浮世</p>
-          </div>
-          <div class="grid entries-grid">
-            <article class="entry-card">
-              <h3>浮世绘·简介</h3>
-              <p>从一纸版画开始，进入江户时代流动的梦与日常。</p>
-            </article>
-            <article class="entry-card">
-              <h3>往事·历史</h3>
-              <p>旧城、风俗、时代波纹，与那些被图像悄悄保存的过去。</p>
-            </article>
-            <article class="entry-card">
-              <h3>美人·才子·英雄</h3>
-              <p>侧影、衣纹、目光与姓名，共同构成被观看的传奇。</p>
-            </article>
-            <article class="entry-card">
-              <h3>神话·妖鬼</h3>
-              <p>神灵、怨魂、狐魅与夜色，在纸上拥有比现实更长的生命。</p>
-            </article>
-            <article class="entry-card">
-              <h3>浮世·风景</h3>
-              <p>桥、水、月、雪、海浪与远山，都是浮世缓慢流动的回声。</p>
-            </article>
-          </div>
-        </div>
-      </section>
+      const timelineData = [
+        {
+          year: '1885',
+          title: '初刊与开场',
+          desc: '系列在秋天开始刊行，确立月下人物的整体基调。',
+          intro: '最初几幅作品已经显出《月百姿》的核心气质：月色、停顿、人物与夜的距离。',
+        },
+        {
+          year: '1886',
+          title: '系列展开',
+          desc: '题材逐渐丰富，月下人物开始形成群像。',
+          intro: '这一阶段里，历史、传说与抒情场景逐渐并置，系列的观看方式开始变得更加多层。',
+        },
+        {
+          year: '1887–1888',
+          title: '人物群像渐丰',
+          desc: '历史、女性、传说与诗意场景持续扩展。',
+          intro: '《月百姿》逐渐不只是一个主题系列，而更像一座在月夜中展开的人物剧场。',
+        },
+        {
+          year: '1889–1892',
+          title: '晚期成熟与完成',
+          desc: '系列在芳年晚年走向成熟，并最终完成。',
+          intro: '晚期阶段的作品更显沉静、凝练，也让整套系列拥有了完整的终章感。',
+        },
+      ];
 
-      <section class="section">
-        <div class="container">
-          <div class="section-heading">
-            <h2>片刻停留</h2>
-            <p>Fragments of the Floating World</p>
+      const selectedWorks = [
+        {
+          title: '月下的鼓声',
+          year: '1885',
+          phase: '初刊与开场',
+          desc: '月光在人物与空白之间停留，像为整套系列先行定下呼吸。',
+          palette: 'from-slate-500/40 via-zinc-300/10 to-amber-700/20',
+        },
+        {
+          title: '桥畔闻笛',
+          year: '1885',
+          phase: '初刊与开场',
+          desc: '开场阶段的抒情场景更强调距离感，让观看先慢下来。',
+          palette: 'from-indigo-500/35 via-slate-200/10 to-rose-900/20',
+        },
+        {
+          title: '夜航之月',
+          year: '1885',
+          phase: '初刊与开场',
+          desc: '水面与夜色相接，人物几乎被月意本身吞没。',
+          palette: 'from-slate-700/40 via-stone-300/10 to-sky-700/20',
+        },
+        {
+          title: '殿上秋思',
+          year: '1886',
+          phase: '系列展开',
+          desc: '历史人物与抒情氛围开始并置，观看路径由此变得更丰富。',
+          palette: 'from-zinc-500/35 via-slate-100/10 to-amber-600/20',
+        },
+        {
+          title: '月下旅人',
+          year: '1886',
+          phase: '系列展开',
+          desc: '旅人形象为系列引入漂泊感，月不只是照明，也是路途。',
+          palette: 'from-sky-700/30 via-slate-100/10 to-zinc-900/25',
+        },
+        {
+          title: '镜前迟照',
+          year: '1886',
+          phase: '系列展开',
+          desc: '女性与月光并置时，情绪更多来自停顿而非叙事高潮。',
+          palette: 'from-rose-700/30 via-stone-100/10 to-slate-800/25',
+        },
+        {
+          title: '古战场残月',
+          year: '1887',
+          phase: '人物群像渐丰',
+          desc: '历史题材开始与夜色发生更强烈的心理张力。',
+          palette: 'from-slate-900/45 via-stone-100/5 to-amber-700/25',
+        },
+        {
+          title: '幽庭微明',
+          year: '1887',
+          phase: '人物群像渐丰',
+          desc: '幽灵与庭院并非为了惊吓，而是为了让月光显得更冷。',
+          palette: 'from-cyan-700/25 via-slate-100/10 to-zinc-900/30',
+        },
+        {
+          title: '宫人与雪月',
+          year: '1888',
+          phase: '人物群像渐丰',
+          desc: '女性形象、季节性气候与抒情留白在这一阶段更加成熟。',
+          palette: 'from-slate-500/25 via-stone-100/10 to-rose-800/20',
+        },
+        {
+          title: '孤舟终夜',
+          year: '1889',
+          phase: '晚期成熟与完成',
+          desc: '晚期作品的叙事更收束，留给观者更多自行补写的空间。',
+          palette: 'from-slate-800/45 via-slate-100/5 to-indigo-900/30',
+        },
+        {
+          title: '霜庭之影',
+          year: '1891',
+          phase: '晚期成熟与完成',
+          desc: '成熟期的月色更像结构本身，使画面沉静而完整。',
+          palette: 'from-zinc-700/40 via-stone-100/10 to-sky-800/20',
+        },
+        {
+          title: '终章月白',
+          year: '1892',
+          phase: '晚期成熟与完成',
+          desc: '系列接近完成时，月意从情节中退后，却统摄整套作品的回响。',
+          palette: 'from-slate-900/45 via-slate-100/10 to-amber-500/20',
+        },
+      ];
+
+      const navItems = [
+        { label: '首页', href: '#top' },
+        { label: '关于《月百姿》', href: '#about' },
+        { label: '时间线', href: '#timeline' },
+        { label: '阶段展开', href: '#phase-detail' },
+        { label: '精选作品', href: '#selected' },
+        { label: '为什么是月', href: '#why-moon' },
+      ];
+
+      function useReveal() {
+        const ref = useRef(null);
+        useEffect(() => {
+          const node = ref.current;
+          if (!node) return;
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  node.classList.add('visible');
+                  observer.unobserve(node);
+                }
+              });
+            },
+            { threshold: 0.18 }
+          );
+          observer.observe(node);
+          return () => observer.disconnect();
+        }, []);
+        return ref;
+      }
+
+      function Reveal({ className = '', children }) {
+        const ref = useReveal();
+        return (
+          <div ref={ref} className={`reveal ${className}`}>
+            {children}
           </div>
-          <div class="grid featured-grid">
-            <article class="featured-card">
-              <div class="thumb thumb-a" role="img" aria-label="神奈川冲浪里"></div>
-              <div class="caption">
-                <h3>《神奈川冲浪里》</h3>
-                <p>葛饰北斋｜约1831年</p>
+        );
+      }
+
+      function App() {
+        const [activePhase, setActivePhase] = useState(0);
+        const [menuOpen, setMenuOpen] = useState(false);
+
+        const worksByPhase = useMemo(
+          () => timelineData.map((phase) => selectedWorks.filter((work) => work.phase === phase.title)),
+          []
+        );
+
+        useEffect(() => {
+          const onHashChange = () => setMenuOpen(false);
+          window.addEventListener('hashchange', onHashChange);
+          return () => window.removeEventListener('hashchange', onHashChange);
+        }, []);
+
+        const activeWorks = worksByPhase[activePhase];
+
+        return (
+          <div id="top" className="min-h-screen bg-moonGlow bg-fixed">
+            <header className="sticky top-0 z-50 border-b border-moon/10 bg-ink/70 backdrop-blur-xl">
+              <div className="mx-auto flex w-[min(1200px,calc(100%-2rem))] items-center justify-between py-4 md:w-[min(1200px,calc(100%-3rem))]">
+                <a href="#top" className="font-serif text-lg tracking-[0.3em] text-moon/95 md:text-xl">
+                  月百姿
+                </a>
+                <button
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-moon/15 text-moon md:hidden"
+                  aria-label="切换导航菜单"
+                  onClick={() => setMenuOpen((open) => !open)}
+                >
+                  <span className="text-xl">{menuOpen ? '×' : '☰'}</span>
+                </button>
+                <nav className="hidden items-center gap-5 text-sm text-moon/72 md:flex">
+                  {navItems.map((item) => (
+                    <a key={item.href} href={item.href} className="transition hover:text-moon">
+                      {item.label}
+                    </a>
+                  ))}
+                </nav>
               </div>
-            </article>
-            <article class="featured-card">
-              <div class="thumb thumb-b" role="img" aria-label="凯风快晴"></div>
-              <div class="caption">
-                <h3>《凯风快晴》</h3>
-                <p>葛饰北斋｜约1831年</p>
-              </div>
-            </article>
-            <article class="featured-card">
-              <div class="thumb thumb-c" role="img" aria-label="名所江户百景"></div>
-              <div class="caption">
-                <h3>《名所江户百景》</h3>
-                <p>歌川广重｜约1856年</p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
+              {menuOpen && (
+                <nav className="border-t border-moon/10 bg-lacquer/95 px-4 py-3 md:hidden">
+                  <div className="flex flex-col gap-3 text-sm text-moon/78">
+                    {navItems.map((item) => (
+                      <a key={item.href} href={item.href} className="py-1" onClick={() => setMenuOpen(false)}>
+                        {item.label}
+                      </a>
+                    ))}
+                  </div>
+                </nav>
+              )}
+            </header>
 
-      <section class="section preface-section">
-        <div class="container preface">
-          <h2>前言</h2>
-          <p>浮世绘并不只是一种古老版画。</p>
-          <p>它关乎城市、四季、欲望，也关乎观看与消逝。</p>
-          <p>这个小站想保留的，不只是图像本身，</p>
-          <p>还有那些停驻在纸上、至今仍未散去的情绪。</p>
-        </div>
-      </section>
-    </main>
+            <main>
+              <section className="relative overflow-hidden">
+                <div className="absolute inset-0 bg-grain opacity-90" />
+                <div className="absolute left-1/2 top-24 h-44 w-44 -translate-x-1/2 rounded-full border border-moon/10 bg-moon/10 blur-3xl" />
+                <div className="relative mx-auto flex min-h-[calc(100vh-72px)] w-[min(1200px,calc(100%-2rem))] flex-col justify-center py-20 md:w-[min(1200px,calc(100%-3rem))] md:py-24">
+                  <Reveal className="max-w-4xl">
+                    <span className="mb-5 inline-flex border border-paper/20 px-4 py-2 text-xs uppercase tracking-[0.35em] text-mist/90">
+                      One Hundred Aspects of the Moon
+                    </span>
+                    <h1 className="max-w-3xl font-serif text-5xl leading-tight text-moon md:text-7xl md:leading-[1.08]">
+                      月百姿
+                    </h1>
+                    <p className="mt-5 max-w-2xl font-serif text-xl text-moon/86 md:text-3xl">
+                      月冈芳年笔下的月夜人间
+                    </p>
+                    <div className="mt-8 max-w-2xl space-y-2 text-base leading-8 text-moon/74 md:text-lg">
+                      <p>一百幅画，一百次月光落下的瞬间。</p>
+                      <p>这不是静止的全集，</p>
+                      <p>而是一部在岁月中逐渐展开的月夜长卷。</p>
+                    </div>
+                    <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+                      <a
+                        href="#timeline"
+                        className="inline-flex items-center justify-center border border-moon/20 bg-moon/10 px-6 py-3 text-sm tracking-[0.18em] text-moon transition hover:border-gold/50 hover:bg-moon/14"
+                      >
+                        进入时间线
+                      </a>
+                      <a
+                        href="#selected"
+                        className="inline-flex items-center justify-center border border-mist/20 px-6 py-3 text-sm tracking-[0.18em] text-moon/80 transition hover:border-moon/30 hover:text-moon"
+                      >
+                        浏览精选
+                      </a>
+                    </div>
+                  </Reveal>
+                </div>
+              </section>
+
+              <section id="about" className="px-4 py-20 md:px-6 md:py-24">
+                <Reveal className="mx-auto w-full max-w-6xl rounded-[2rem] border border-paper/10 bg-white/[0.03] p-8 shadow-moon paper-texture md:p-12">
+                  <div className="grid gap-10 md:grid-cols-[1.1fr_1fr] md:gap-16">
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.35em] text-gold/90">About the Series</p>
+                      <h2 className="mt-4 font-serif text-3xl leading-tight text-moon md:text-5xl">
+                        一组以月为线索缓慢展开的夜之剧场
+                      </h2>
+                    </div>
+                    <div className="space-y-5 text-sm leading-8 text-moon/74 md:text-base">
+                      <p>
+                        《月百姿》是月冈芳年晚年的代表系列，共 100 幅，始于 1885 年秋，至 1892 年完成。它以“月”为线索，将历史人物、传说角色、女性形象、幽灵与诗意时刻编织成一个连续展开的夜之剧场。
+                      </p>
+                      <p>
+                        这套作品的重要性，不只在于题材的广阔，更在于它让木版画中的叙事节奏变得异常克制：月光照见的不是热闹的情节，而是人物与时间之间微妙的停顿。
+                      </p>
+                      <p>
+                        今天再看《月百姿》，依然能感到它的当代性。它把分散的历史与传说连接成一条可被重新观看的路径，也提醒我们，图像可以以最安静的方式组织情绪、距离与记忆。
+                      </p>
+                    </div>
+                  </div>
+                </Reveal>
+              </section>
+
+              <section id="timeline" className="px-4 py-20 md:px-6 md:py-24">
+                <Reveal className="mx-auto w-full max-w-6xl">
+                  <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.35em] text-gold/90">Timeline</p>
+                      <h2 className="mt-4 font-serif text-3xl md:text-5xl">时间是这场观看的唯一主轴</h2>
+                    </div>
+                    <p className="max-w-xl text-sm leading-7 text-moon/68 md:text-base">
+                      以刊行阶段进入《月百姿》，让作品不再像静止的总集，而像一部被月光逐段照亮的长卷。
+                    </p>
+                  </div>
+
+                  <div className="timeline-track relative grid gap-6 md:grid-cols-4 md:gap-5">
+                    {timelineData.map((phase, index) => {
+                      const active = activePhase === index;
+                      return (
+                        <button
+                          key={phase.year}
+                          type="button"
+                          onClick={() => setActivePhase(index)}
+                          className={`group relative text-left transition duration-500 ${
+                            active ? 'md:-translate-y-1' : 'opacity-90 hover:opacity-100'
+                          }`}
+                        >
+                          <div className="mb-4 flex items-center gap-4 md:flex-col md:items-start md:gap-3">
+                            <span
+                              className={`relative z-10 h-9 w-9 rounded-full border transition ${
+                                active
+                                  ? 'border-gold/60 bg-moon/20 shadow-[0_0_30px_rgba(157,132,87,0.25)]'
+                                  : 'border-moon/20 bg-ink/80 group-hover:border-moon/35'
+                              }`}
+                            />
+                            <span className="text-xs uppercase tracking-[0.35em] text-mist/75">{phase.year}</span>
+                          </div>
+                          <div
+                            className={`paper-texture relative overflow-hidden rounded-[1.75rem] border p-5 md:min-h-[320px] ${
+                              active
+                                ? 'border-gold/30 bg-white/[0.08] shadow-moon'
+                                : 'border-paper/10 bg-white/[0.03]'
+                            }`}
+                          >
+                            <div className={`absolute inset-x-0 top-0 h-1 ${active ? 'bg-gradient-to-r from-transparent via-gold/70 to-transparent' : 'bg-transparent'}`} />
+                            <p className="text-xs uppercase tracking-[0.3em] text-mist/70">阶段</p>
+                            <h3 className="mt-4 font-serif text-2xl text-moon">{phase.title}</h3>
+                            <p className="mt-4 text-sm leading-7 text-moon/66">{phase.desc}</p>
+                            <div className="mt-6 overflow-hidden rounded-[1.5rem] border border-moon/10 bg-gradient-to-br from-white/10 via-transparent to-haze/20 p-4">
+                              <div className="aspect-[4/3] rounded-[1.25rem] border border-dashed border-moon/15 bg-gradient-to-br from-moon/8 via-transparent to-gold/10" />
+                              <p className="mt-3 text-xs tracking-[0.25em] text-mist/60">阶段缩略图占位</p>
+                            </div>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </Reveal>
+              </section>
+
+              <section id="phase-detail" className="px-4 pb-20 md:px-6 md:pb-24">
+                <Reveal className="mx-auto grid w-full max-w-6xl gap-8 rounded-[2rem] border border-paper/10 bg-white/[0.03] p-8 shadow-moon paper-texture lg:grid-cols-[0.95fr_1.4fr] md:p-12">
+                  <div className="space-y-6">
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.35em] text-gold/90">Phase Detail</p>
+                      <h2 className="mt-4 font-serif text-3xl leading-tight md:text-5xl">
+                        {timelineData[activePhase].year}｜{timelineData[activePhase].title}
+                      </h2>
+                    </div>
+                    <p className="text-base leading-8 text-moon/72">{timelineData[activePhase].intro}</p>
+                    <div className="rounded-[1.5rem] border border-moon/10 bg-ink/45 p-5">
+                      <p className="text-xs uppercase tracking-[0.3em] text-mist/60">Curatorial Note</p>
+                      <p className="mt-4 text-sm leading-7 text-moon/68">
+                        {activePhase === 0 && '系列在秋天开始刊行，最初几幅作品已经确立了整套《月百姿》的夜色基调：月不仅照亮人物，也制造距离、静默与情绪的停顿。'}
+                        {activePhase === 1 && '随着系列展开，历史、传说与抒情场景开始互相映照，月成为连接不同题材的内部结构，而非外在装饰。'}
+                        {activePhase === 2 && '人物群像渐渐丰盛之后，观看的重点不再只是“谁出现了”，而是“月如何让这些人物被放进同一种冷静而诗性的时空中”。'}
+                        {activePhase === 3 && '晚期的作品收束了戏剧性，让整套系列显出成熟与终章感。月色愈发沉静，也让《月百姿》最终成为一个完整而连贯的夜间世界。'}
+                      </p>
+                    </div>
+                    <a
+                      href="#selected"
+                      className="inline-flex items-center border border-gold/30 px-5 py-3 text-sm tracking-[0.18em] text-moon transition hover:border-gold/50 hover:bg-white/[0.04]"
+                    >
+                      查看更多
+                    </a>
+                  </div>
+
+                  <div className="grid gap-5 md:grid-cols-3">
+                    {activeWorks.map((work) => (
+                      <article
+                        key={work.title}
+                        className="group overflow-hidden rounded-[1.5rem] border border-paper/10 bg-white/[0.04] transition duration-500 hover:-translate-y-1 hover:border-gold/35 hover:bg-white/[0.06]"
+                      >
+                        <div className={`aspect-[4/5] bg-gradient-to-br ${work.palette} p-4`}>
+                          <div className="flex h-full items-end rounded-[1.15rem] border border-moon/10 bg-black/10 p-4">
+                            <span className="text-[11px] uppercase tracking-[0.3em] text-moon/65">Image Placeholder</span>
+                          </div>
+                        </div>
+                        <div className="space-y-3 p-5">
+                          <div className="flex items-center justify-between gap-3 text-xs uppercase tracking-[0.28em] text-mist/70">
+                            <span>{work.year}</span>
+                            <span>{work.phase}</span>
+                          </div>
+                          <h3 className="font-serif text-xl text-moon transition group-hover:text-moon/95">{work.title}</h3>
+                          <p className="text-sm leading-7 text-moon/66">{work.desc}</p>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </Reveal>
+              </section>
+
+              <section id="selected" className="px-4 py-20 md:px-6 md:py-24">
+                <Reveal className="mx-auto w-full max-w-6xl">
+                  <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.35em] text-gold/90">Selected Works</p>
+                      <h2 className="mt-4 font-serif text-3xl md:text-5xl">12 幅精选作品占位</h2>
+                    </div>
+                    <p className="max-w-xl text-sm leading-7 text-moon/68 md:text-base">
+                      第一版先以 12 张占位卡片建立结构，后续可直接替换为真实作品图像与具体条目说明。
+                    </p>
+                  </div>
+
+                  <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                    {selectedWorks.map((work, index) => (
+                      <article
+                        key={work.title}
+                        className={`group paper-texture relative overflow-hidden rounded-[1.75rem] border border-paper/10 bg-white/[0.035] transition duration-500 hover:-translate-y-1 hover:border-gold/35 hover:shadow-moon ${
+                          index % 5 === 0 ? 'xl:translate-y-8' : ''
+                        } ${index % 5 === 3 ? 'xl:-translate-y-6' : ''}`}
+                      >
+                        <div className={`aspect-[4/4.8] overflow-hidden bg-gradient-to-br ${work.palette} p-5`}>
+                          <div className="flex h-full items-end rounded-[1.4rem] border border-moon/10 bg-black/10 p-5 transition duration-500 group-hover:scale-[1.02] group-hover:border-moon/20">
+                            <span className="text-[11px] uppercase tracking-[0.3em] text-moon/68">作品图像占位</span>
+                          </div>
+                        </div>
+                        <div className="space-y-3 p-6">
+                          <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.28em] text-mist/70">
+                            <span>{work.year}</span>
+                            <span className="text-moon/20">•</span>
+                            <span>{work.phase}</span>
+                          </div>
+                          <h3 className="font-serif text-2xl text-moon">{work.title}</h3>
+                          <p className="text-sm leading-7 text-moon/68">{work.desc}</p>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </Reveal>
+              </section>
+
+              <section id="why-moon" className="px-4 pb-20 md:px-6 md:pb-24">
+                <Reveal className="mx-auto grid w-full max-w-6xl gap-8 rounded-[2rem] border border-paper/10 bg-white/[0.03] p-8 shadow-moon paper-texture lg:grid-cols-[0.9fr_1.3fr] md:p-12">
+                  <div className="flex flex-col justify-between gap-8">
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.35em] text-gold/90">Why the Moon</p>
+                      <h2 className="mt-4 font-serif text-3xl leading-tight md:text-5xl">月不是背景，而是系列的精神结构</h2>
+                    </div>
+                    <div className="flex items-center gap-5">
+                      <div className="flex h-24 w-24 items-center justify-center rounded-full border border-moon/15 bg-moon/8 shadow-[0_0_40px_rgba(243,241,235,0.08)]">
+                        <div className="h-14 w-14 rounded-full border border-gold/40 bg-gradient-to-br from-moon/90 via-moon/35 to-transparent" />
+                      </div>
+                      <p className="max-w-xs text-sm leading-7 text-moon/62">
+                        月相、留白与冷色层次共同构成观看节奏，像展厅中一盏不喧哗的引导光。
+                      </p>
+                    </div>
+                  </div>
+                  <div className="space-y-6 text-sm leading-8 text-moon/72 md:text-base">
+                    <p>
+                      在《月百姿》中，月并不只是夜景中的点缀。它像一条隐形的结构线，把彼此分散的历史人物、传说角色、女性形象与幽灵时刻组织成同一部作品。
+                    </p>
+                    <p>
+                      月的作用也不在于制造戏剧高潮，而在于创造距离。它让人物与观者之间保留出一层不可完全抵达的空白，让每个场景都带着轻微的寒意、克制与沉思。
+                    </p>
+                    <p>
+                      正因如此，《月百姿》值得被当作一场数字展览来观看：不是快速浏览一百幅画，而是在同一轮月光之下，看见不同故事如何被缓慢连接，如何在旧纸、木版与时间的缝隙里重新发出微光。
+                    </p>
+                  </div>
+                </Reveal>
+              </section>
+            </main>
+
+            <footer className="border-t border-paper/10 px-4 py-8 md:px-6">
+              <div className="mx-auto flex w-full max-w-6xl flex-col gap-5 md:flex-row md:items-center md:justify-between">
+                <div>
+                  <p className="font-serif text-2xl text-moon">月百姿</p>
+                  <p className="mt-2 text-sm text-moon/60">
+                    A digital exhibition on Tsukioka Yoshitoshi’s moonlit world.
+                  </p>
+                </div>
+                <div className="flex flex-wrap items-center gap-4 text-sm text-moon/60">
+                  <span>Future credits reserved</span>
+                  <a href="#top" className="border border-moon/15 px-4 py-2 transition hover:border-gold/40 hover:text-moon">
+                    Back to top
+                  </a>
+                </div>
+              </div>
+            </footer>
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
   </body>
 </html>
