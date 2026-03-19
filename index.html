@@ -3,106 +3,325 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Floating World | 江户绮梦</title>
+    <title>月百姿｜月冈芳年笔下的月夜人间</title>
+    <meta
+      name="description"
+      content="《月百姿》数字展览网站：以时间线为核心浏览方式，观看月冈芳年笔下逐步展开的月夜人间。"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
-    <header class="site-header overlay-header">
-      <div class="container nav-wrap">
-        <a class="brand" href="index.html">江户绮梦</a>
-        <nav class="main-nav" aria-label="主导航">
-          <a href="index.html" aria-current="page">首页</a>
-          <a href="history.html">往事·历史</a>
-          <a href="figures.html">美人·才子·英雄</a>
-          <a href="myths.html">神话·妖鬼</a>
-          <a href="landscape.html">浮世·风景</a>
-          <a href="about.html">关于</a>
+  <body class="moon100-site">
+    <header class="moon100-header">
+      <div class="moon100-shell moon100-header__inner">
+        <a class="moon100-brand" href="#top">月百姿</a>
+        <button class="moon100-menu-button" type="button" aria-expanded="false" aria-controls="site-nav">
+          菜单
+        </button>
+        <nav id="site-nav" class="moon100-nav" aria-label="主导航">
+          <a href="#top">首页</a>
+          <a href="#about">关于《月百姿》</a>
+          <a href="#timeline">时间线</a>
+          <a href="#phase-detail">阶段展开</a>
+          <a href="#selected">精选作品</a>
+          <a href="#why-moon">为什么是月</a>
         </nav>
       </div>
     </header>
 
-    <main>
-      <section class="hero-screen">
-        <div class="hero-mask"></div>
-        <div class="container hero-inner">
-          <h1>Floating World</h1>
-          <p class="hero-subtitle">Where beauty lingers, seasons drift, and the city becomes a dream.</p>
-          <a class="btn-primary" href="#through-world">Begin Wandering</a>
-        </div>
-      </section>
-
-      <section id="through-world" class="section light-paper">
-        <div class="container">
-          <div class="section-heading">
-            <h2>Through the Painted World</h2>
-            <p>几重浮世</p>
+    <main id="top">
+      <section class="moon100-hero">
+        <div class="moon100-shell moon100-hero__inner">
+          <p class="moon100-eyebrow">One Hundred Aspects of the Moon</p>
+          <h1>月百姿</h1>
+          <p class="moon100-hero__subtitle">月冈芳年笔下的月夜人间</p>
+          <div class="moon100-hero__lede">
+            <p>一百幅画，一百次月光落下的瞬间。</p>
+            <p>这不是静止的全集，而是一部在岁月中逐渐展开的月夜长卷。</p>
           </div>
-          <div class="grid entries-grid">
-            <article class="entry-card">
-              <h3>浮世绘·简介</h3>
-              <p>从一纸版画开始，进入江户时代流动的梦与日常。</p>
-            </article>
-            <article class="entry-card">
-              <h3>往事·历史</h3>
-              <p>旧城、风俗、时代波纹，与那些被图像悄悄保存的过去。</p>
-            </article>
-            <article class="entry-card">
-              <h3>美人·才子·英雄</h3>
-              <p>侧影、衣纹、目光与姓名，共同构成被观看的传奇。</p>
-            </article>
-            <article class="entry-card">
-              <h3>神话·妖鬼</h3>
-              <p>神灵、怨魂、狐魅与夜色，在纸上拥有比现实更长的生命。</p>
-            </article>
-            <article class="entry-card">
-              <h3>浮世·风景</h3>
-              <p>桥、水、月、雪、海浪与远山，都是浮世缓慢流动的回声。</p>
-            </article>
+          <div class="moon100-hero__actions">
+            <a class="moon100-button moon100-button--primary" href="#timeline">进入时间线</a>
+            <a class="moon100-button" href="#selected">浏览精选</a>
           </div>
         </div>
       </section>
 
-      <section class="section">
-        <div class="container">
-          <div class="section-heading">
-            <h2>片刻停留</h2>
-            <p>Fragments of the Floating World</p>
+      <section id="about" class="moon100-section moon100-section--panel">
+        <div class="moon100-shell moon100-two-column">
+          <div>
+            <p class="moon100-eyebrow">About the Series</p>
+            <h2 class="moon100-title">一组以月为线索缓慢展开的夜之剧场</h2>
           </div>
-          <div class="grid featured-grid">
-            <article class="featured-card">
-              <div class="thumb thumb-a" role="img" aria-label="神奈川冲浪里"></div>
-              <div class="caption">
-                <h3>《神奈川冲浪里》</h3>
-                <p>葛饰北斋｜约1831年</p>
-              </div>
-            </article>
-            <article class="featured-card">
-              <div class="thumb thumb-b" role="img" aria-label="凯风快晴"></div>
-              <div class="caption">
-                <h3>《凯风快晴》</h3>
-                <p>葛饰北斋｜约1831年</p>
-              </div>
-            </article>
-            <article class="featured-card">
-              <div class="thumb thumb-c" role="img" aria-label="名所江户百景"></div>
-              <div class="caption">
-                <h3>《名所江户百景》</h3>
-                <p>歌川广重｜约1856年</p>
-              </div>
-            </article>
+          <div class="moon100-prose">
+            <p>
+              《月百姿》是月冈芳年晚年的代表系列，共 100 幅，始于 1885 年秋，至 1892 年完成。它以“月”为线索，将历史人物、传说角色、女性形象、幽灵与诗意时刻编织成一个连续展开的夜之剧场。
+            </p>
+            <p>
+              这套作品的重要性，不只在于题材的广阔，更在于它让木版画中的叙事节奏变得异常克制：月光照见的不是热闹的情节，而是人物与时间之间微妙的停顿。
+            </p>
+            <p>
+              今天再看《月百姿》，依然能感到它的当代性。它把分散的历史与传说连接成一条可被重新观看的路径，也提醒我们，图像可以以最安静的方式组织情绪、距离与记忆。
+            </p>
           </div>
         </div>
       </section>
 
-      <section class="section preface-section">
-        <div class="container preface">
-          <h2>前言</h2>
-          <p>浮世绘并不只是一种古老版画。</p>
-          <p>它关乎城市、四季、欲望，也关乎观看与消逝。</p>
-          <p>这个小站想保留的，不只是图像本身，</p>
-          <p>还有那些停驻在纸上、至今仍未散去的情绪。</p>
+      <section id="timeline" class="moon100-section">
+        <div class="moon100-shell">
+          <div class="moon100-section__heading">
+            <div>
+              <p class="moon100-eyebrow">Timeline</p>
+              <h2 class="moon100-title">时间是这场观看的唯一主轴</h2>
+            </div>
+            <p class="moon100-heading-copy">
+              以刊行阶段进入《月百姿》，让作品不再像静止的总集，而像一部被月光逐段照亮的长卷。
+            </p>
+          </div>
+
+          <div class="moon100-timeline" role="tablist" aria-label="《月百姿》时间线阶段">
+            <button class="moon100-timeline__item is-active" type="button" data-phase="phase-1885" role="tab" aria-selected="true">
+              <span class="moon100-timeline__dot"></span>
+              <span class="moon100-timeline__year">1885</span>
+              <span class="moon100-card">
+                <span class="moon100-card__eyebrow">阶段</span>
+                <strong>初刊与开场</strong>
+                <span>系列在秋天开始刊行，确立月下人物的整体基调。</span>
+                <span class="moon100-card__thumb">
+                  <img src="images/moon (1).jpg" alt="1885 初刊与开场阶段作品预览" loading="lazy" decoding="async" />
+                </span>
+              </span>
+            </button>
+            <button class="moon100-timeline__item" type="button" data-phase="phase-1886" role="tab" aria-selected="false">
+              <span class="moon100-timeline__dot"></span>
+              <span class="moon100-timeline__year">1886</span>
+              <span class="moon100-card">
+                <span class="moon100-card__eyebrow">阶段</span>
+                <strong>系列展开</strong>
+                <span>题材逐渐丰富，月下人物开始形成群像。</span>
+                <span class="moon100-card__thumb">
+                  <img src="images/moon (4).jpg" alt="1886 系列展开阶段作品预览" loading="lazy" decoding="async" />
+                </span>
+              </span>
+            </button>
+            <button class="moon100-timeline__item" type="button" data-phase="phase-1887" role="tab" aria-selected="false">
+              <span class="moon100-timeline__dot"></span>
+              <span class="moon100-timeline__year">1887–1888</span>
+              <span class="moon100-card">
+                <span class="moon100-card__eyebrow">阶段</span>
+                <strong>人物群像渐丰</strong>
+                <span>历史、女性、传说与诗意场景持续扩展。</span>
+                <span class="moon100-card__thumb">
+                  <img src="images/moon (7).jpg" alt="1887 至 1888 人物群像渐丰阶段作品预览" loading="lazy" decoding="async" />
+                </span>
+              </span>
+            </button>
+            <button class="moon100-timeline__item" type="button" data-phase="phase-1889" role="tab" aria-selected="false">
+              <span class="moon100-timeline__dot"></span>
+              <span class="moon100-timeline__year">1889–1892</span>
+              <span class="moon100-card">
+                <span class="moon100-card__eyebrow">阶段</span>
+                <strong>晚期成熟与完成</strong>
+                <span>系列在芳年晚年走向成熟，并最终完成。</span>
+                <span class="moon100-card__thumb">
+                  <img src="images/moon (10).jpg" alt="1889 至 1892 晚期成熟与完成阶段作品预览" loading="lazy" decoding="async" />
+                </span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="phase-detail" class="moon100-section moon100-section--panel">
+        <div class="moon100-shell">
+          <div class="moon100-phase-detail is-active" id="phase-1885" role="tabpanel">
+            <div class="moon100-phase-detail__intro">
+              <p class="moon100-eyebrow">Phase Detail</p>
+              <h2 class="moon100-title">1885｜初刊与开场</h2>
+              <p>
+                系列在秋天开始刊行，最初几幅作品已经确立了整套《月百姿》的夜色基调：月不仅照亮人物，也制造距离、静默与情绪的停顿。
+              </p>
+              <a class="moon100-button" href="#selected">查看更多</a>
+            </div>
+            <div class="moon100-work-strip">
+              <article class="moon100-work-chip">
+                <img src="images/moon (1).jpg" alt="月下的鼓声" loading="lazy" decoding="async" />
+                <div><strong>月下的鼓声</strong><span>1885 · 初刊与开场</span></div>
+              </article>
+              <article class="moon100-work-chip">
+                <img src="images/moon (2).jpg" alt="桥畔闻笛" loading="lazy" decoding="async" />
+                <div><strong>桥畔闻笛</strong><span>1885 · 初刊与开场</span></div>
+              </article>
+              <article class="moon100-work-chip">
+                <img src="images/moon (3).jpg" alt="夜航之月" loading="lazy" decoding="async" />
+                <div><strong>夜航之月</strong><span>1885 · 初刊与开场</span></div>
+              </article>
+            </div>
+          </div>
+
+          <div class="moon100-phase-detail" id="phase-1886" role="tabpanel" hidden>
+            <div class="moon100-phase-detail__intro">
+              <p class="moon100-eyebrow">Phase Detail</p>
+              <h2 class="moon100-title">1886｜系列展开</h2>
+              <p>
+                随着系列展开，历史、传说与抒情场景开始互相映照，月成为连接不同题材的内部结构，而非外在装饰。
+              </p>
+              <a class="moon100-button" href="#selected">查看更多</a>
+            </div>
+            <div class="moon100-work-strip">
+              <article class="moon100-work-chip">
+                <img src="images/moon (4).jpg" alt="殿上秋思" loading="lazy" decoding="async" />
+                <div><strong>殿上秋思</strong><span>1886 · 系列展开</span></div>
+              </article>
+              <article class="moon100-work-chip">
+                <img src="images/moon (5).jpg" alt="月下旅人" loading="lazy" decoding="async" />
+                <div><strong>月下旅人</strong><span>1886 · 系列展开</span></div>
+              </article>
+              <article class="moon100-work-chip">
+                <img src="images/moon (6).jpg" alt="镜前迟照" loading="lazy" decoding="async" />
+                <div><strong>镜前迟照</strong><span>1886 · 系列展开</span></div>
+              </article>
+            </div>
+          </div>
+
+          <div class="moon100-phase-detail" id="phase-1887" role="tabpanel" hidden>
+            <div class="moon100-phase-detail__intro">
+              <p class="moon100-eyebrow">Phase Detail</p>
+              <h2 class="moon100-title">1887–1888｜人物群像渐丰</h2>
+              <p>
+                人物群像渐渐丰盛之后，观看的重点不再只是“谁出现了”，而是“月如何让这些人物被放进同一种冷静而诗性的时空中”。
+              </p>
+              <a class="moon100-button" href="#selected">查看更多</a>
+            </div>
+            <div class="moon100-work-strip">
+              <article class="moon100-work-chip">
+                <img src="images/moon (7).jpg" alt="古战场残月" loading="lazy" decoding="async" />
+                <div><strong>古战场残月</strong><span>1887 · 人物群像渐丰</span></div>
+              </article>
+              <article class="moon100-work-chip">
+                <img src="images/moon (8).jpg" alt="幽庭微明" loading="lazy" decoding="async" />
+                <div><strong>幽庭微明</strong><span>1887 · 人物群像渐丰</span></div>
+              </article>
+              <article class="moon100-work-chip">
+                <img src="images/moon (9).jpg" alt="宫人与雪月" loading="lazy" decoding="async" />
+                <div><strong>宫人与雪月</strong><span>1888 · 人物群像渐丰</span></div>
+              </article>
+            </div>
+          </div>
+
+          <div class="moon100-phase-detail" id="phase-1889" role="tabpanel" hidden>
+            <div class="moon100-phase-detail__intro">
+              <p class="moon100-eyebrow">Phase Detail</p>
+              <h2 class="moon100-title">1889–1892｜晚期成熟与完成</h2>
+              <p>
+                晚期的作品收束了戏剧性，让整套系列显出成熟与终章感。月色愈发沉静，也让《月百姿》最终成为一个完整而连贯的夜间世界。
+              </p>
+              <a class="moon100-button" href="#selected">查看更多</a>
+            </div>
+            <div class="moon100-work-strip">
+              <article class="moon100-work-chip">
+                <img src="images/moon (10).jpg" alt="孤舟终夜" loading="lazy" decoding="async" />
+                <div><strong>孤舟终夜</strong><span>1889 · 晚期成熟与完成</span></div>
+              </article>
+              <article class="moon100-work-chip">
+                <img src="images/moon (11).jpg" alt="霜庭之影" loading="lazy" decoding="async" />
+                <div><strong>霜庭之影</strong><span>1891 · 晚期成熟与完成</span></div>
+              </article>
+              <article class="moon100-work-chip">
+                <img src="images/moon (12).jpg" alt="终章月白" loading="lazy" decoding="async" />
+                <div><strong>终章月白</strong><span>1892 · 晚期成熟与完成</span></div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="selected" class="moon100-section">
+        <div class="moon100-shell">
+          <div class="moon100-section__heading">
+            <div>
+              <p class="moon100-eyebrow">Selected Works</p>
+              <h2 class="moon100-title">12 幅精选作品</h2>
+            </div>
+            <p class="moon100-heading-copy">
+              采用直接本地图像路径与轻量卡片结构，去掉运行时图片回退链路，减少首屏与滚动过程中的额外负担。
+            </p>
+          </div>
+
+          <div class="moon100-gallery">
+            <article class="moon100-work-card"><img src="images/moon (1).jpg" alt="月下的鼓声" loading="lazy" decoding="async" /><div><span>1885 · 初刊与开场</span><h3>月下的鼓声</h3><p>月光在人物与空白之间停留，像为整套系列先行定下呼吸。</p></div></article>
+            <article class="moon100-work-card"><img src="images/moon (2).jpg" alt="桥畔闻笛" loading="lazy" decoding="async" /><div><span>1885 · 初刊与开场</span><h3>桥畔闻笛</h3><p>开场阶段的抒情场景更强调距离感，让观看先慢下来。</p></div></article>
+            <article class="moon100-work-card"><img src="images/moon (3).jpg" alt="夜航之月" loading="lazy" decoding="async" /><div><span>1885 · 初刊与开场</span><h3>夜航之月</h3><p>水面与夜色相接，人物几乎被月意本身吞没。</p></div></article>
+            <article class="moon100-work-card"><img src="images/moon (4).jpg" alt="殿上秋思" loading="lazy" decoding="async" /><div><span>1886 · 系列展开</span><h3>殿上秋思</h3><p>历史人物与抒情氛围开始并置，观看路径由此变得更丰富。</p></div></article>
+            <article class="moon100-work-card"><img src="images/moon (5).jpg" alt="月下旅人" loading="lazy" decoding="async" /><div><span>1886 · 系列展开</span><h3>月下旅人</h3><p>旅人形象为系列引入漂泊感，月不只是照明，也是路途。</p></div></article>
+            <article class="moon100-work-card"><img src="images/moon (6).jpg" alt="镜前迟照" loading="lazy" decoding="async" /><div><span>1886 · 系列展开</span><h3>镜前迟照</h3><p>女性与月光并置时，情绪更多来自停顿而非叙事高潮。</p></div></article>
+            <article class="moon100-work-card"><img src="images/moon (7).jpg" alt="古战场残月" loading="lazy" decoding="async" /><div><span>1887 · 人物群像渐丰</span><h3>古战场残月</h3><p>历史题材开始与夜色发生更强烈的心理张力。</p></div></article>
+            <article class="moon100-work-card"><img src="images/moon (8).jpg" alt="幽庭微明" loading="lazy" decoding="async" /><div><span>1887 · 人物群像渐丰</span><h3>幽庭微明</h3><p>幽灵与庭院并非为了惊吓，而是为了让月光显得更冷。</p></div></article>
+            <article class="moon100-work-card"><img src="images/moon (9).jpg" alt="宫人与雪月" loading="lazy" decoding="async" /><div><span>1888 · 人物群像渐丰</span><h3>宫人与雪月</h3><p>女性形象、季节性气候与抒情留白在这一阶段更加成熟。</p></div></article>
+            <article class="moon100-work-card"><img src="images/moon (10).jpg" alt="孤舟终夜" loading="lazy" decoding="async" /><div><span>1889 · 晚期成熟与完成</span><h3>孤舟终夜</h3><p>晚期作品的叙事更收束，留给观者更多自行补写的空间。</p></div></article>
+            <article class="moon100-work-card"><img src="images/moon (11).jpg" alt="霜庭之影" loading="lazy" decoding="async" /><div><span>1891 · 晚期成熟与完成</span><h3>霜庭之影</h3><p>成熟期的月色更像结构本身，使画面沉静而完整。</p></div></article>
+            <article class="moon100-work-card"><img src="images/moon (12).jpg" alt="终章月白" loading="lazy" decoding="async" /><div><span>1892 · 晚期成熟与完成</span><h3>终章月白</h3><p>系列接近完成时，月意从情节中退后，却统摄整套作品的回响。</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="why-moon" class="moon100-section moon100-section--panel">
+        <div class="moon100-shell moon100-two-column">
+          <div>
+            <p class="moon100-eyebrow">Why the Moon</p>
+            <h2 class="moon100-title">月不是背景，而是系列的精神结构</h2>
+          </div>
+          <div class="moon100-prose">
+            <p>
+              在《月百姿》中，月并不只是夜景中的点缀。它像一条隐形的结构线，把彼此分散的历史人物、传说角色、女性形象与幽灵时刻组织成同一部作品。
+            </p>
+            <p>
+              月的作用也不在于制造戏剧高潮，而在于创造距离。它让人物与观者之间保留出一层不可完全抵达的空白，让每个场景都带着轻微的寒意、克制与沉思。
+            </p>
+            <p>
+              正因如此，《月百姿》值得被当作一场数字展览来观看：不是快速浏览一百幅画，而是在同一轮月光之下，看见不同故事如何被缓慢连接，如何在旧纸、木版与时间的缝隙里重新发出微光。
+            </p>
+          </div>
         </div>
       </section>
     </main>
+
+    <footer class="moon100-footer">
+      <div class="moon100-shell moon100-footer__inner">
+        <div>
+          <p class="moon100-brand moon100-brand--footer">月百姿</p>
+          <p>A digital exhibition on Tsukioka Yoshitoshi’s moonlit world.</p>
+        </div>
+        <a class="moon100-button" href="#top">Back to top</a>
+      </div>
+    </footer>
+
+    <script>
+      const menuButton = document.querySelector('.moon100-menu-button');
+      const nav = document.querySelector('.moon100-nav');
+      const timelineItems = document.querySelectorAll('.moon100-timeline__item');
+      const phasePanels = document.querySelectorAll('.moon100-phase-detail');
+
+      menuButton?.addEventListener('click', () => {
+        const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+        menuButton.setAttribute('aria-expanded', String(!expanded));
+        nav.classList.toggle('is-open');
+      });
+
+      timelineItems.forEach((item) => {
+        item.addEventListener('click', () => {
+          const phaseId = item.dataset.phase;
+          timelineItems.forEach((button) => {
+            const isActive = button === item;
+            button.classList.toggle('is-active', isActive);
+            button.setAttribute('aria-selected', String(isActive));
+          });
+
+          phasePanels.forEach((panel) => {
+            const isActive = panel.id === phaseId;
+            panel.classList.toggle('is-active', isActive);
+            panel.hidden = !isActive;
+          });
+        });
+      });
+    </script>
   </body>
 </html>
