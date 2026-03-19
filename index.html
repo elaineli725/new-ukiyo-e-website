@@ -8,6 +8,7 @@
       name="description"
       content="《月百姿》数字展览网站：以时间线为核心浏览方式，观看月冈芳年笔下逐步展开的月夜人间。"
     />
+    <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -122,7 +123,7 @@
       }
     </style>
   </head>
-  <body class="font-sans text-moon antialiased selection:bg-gold/30 selection:text-moon">
+  <body class="theme-moon100 font-sans text-moon antialiased selection:bg-gold/30 selection:text-moon">
     <div id="root"></div>
 
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
@@ -165,6 +166,7 @@
           phase: '初刊与开场',
           desc: '月光在人物与空白之间停留，像为整套系列先行定下呼吸。',
           palette: 'from-slate-500/40 via-zinc-300/10 to-amber-700/20',
+          image: 'images/moon100/moon-01.jpg',
         },
         {
           title: '桥畔闻笛',
@@ -172,6 +174,7 @@
           phase: '初刊与开场',
           desc: '开场阶段的抒情场景更强调距离感，让观看先慢下来。',
           palette: 'from-indigo-500/35 via-slate-200/10 to-rose-900/20',
+          image: 'images/moon100/moon-02.jpg',
         },
         {
           title: '夜航之月',
@@ -179,6 +182,7 @@
           phase: '初刊与开场',
           desc: '水面与夜色相接，人物几乎被月意本身吞没。',
           palette: 'from-slate-700/40 via-stone-300/10 to-sky-700/20',
+          image: 'images/moon100/moon-03.jpg',
         },
         {
           title: '殿上秋思',
@@ -186,6 +190,7 @@
           phase: '系列展开',
           desc: '历史人物与抒情氛围开始并置，观看路径由此变得更丰富。',
           palette: 'from-zinc-500/35 via-slate-100/10 to-amber-600/20',
+          image: 'images/moon100/moon-04.jpg',
         },
         {
           title: '月下旅人',
@@ -193,6 +198,7 @@
           phase: '系列展开',
           desc: '旅人形象为系列引入漂泊感，月不只是照明，也是路途。',
           palette: 'from-sky-700/30 via-slate-100/10 to-zinc-900/25',
+          image: 'images/moon100/moon-05.jpg',
         },
         {
           title: '镜前迟照',
@@ -200,6 +206,7 @@
           phase: '系列展开',
           desc: '女性与月光并置时，情绪更多来自停顿而非叙事高潮。',
           palette: 'from-rose-700/30 via-stone-100/10 to-slate-800/25',
+          image: 'images/moon100/moon-06.jpg',
         },
         {
           title: '古战场残月',
@@ -207,6 +214,7 @@
           phase: '人物群像渐丰',
           desc: '历史题材开始与夜色发生更强烈的心理张力。',
           palette: 'from-slate-900/45 via-stone-100/5 to-amber-700/25',
+          image: 'images/moon100/moon-07.jpg',
         },
         {
           title: '幽庭微明',
@@ -214,6 +222,7 @@
           phase: '人物群像渐丰',
           desc: '幽灵与庭院并非为了惊吓，而是为了让月光显得更冷。',
           palette: 'from-cyan-700/25 via-slate-100/10 to-zinc-900/30',
+          image: 'images/moon100/moon-08.jpg',
         },
         {
           title: '宫人与雪月',
@@ -221,6 +230,7 @@
           phase: '人物群像渐丰',
           desc: '女性形象、季节性气候与抒情留白在这一阶段更加成熟。',
           palette: 'from-slate-500/25 via-stone-100/10 to-rose-800/20',
+          image: '',
         },
         {
           title: '孤舟终夜',
@@ -228,6 +238,7 @@
           phase: '晚期成熟与完成',
           desc: '晚期作品的叙事更收束，留给观者更多自行补写的空间。',
           palette: 'from-slate-800/45 via-slate-100/5 to-indigo-900/30',
+          image: '',
         },
         {
           title: '霜庭之影',
@@ -235,6 +246,7 @@
           phase: '晚期成熟与完成',
           desc: '成熟期的月色更像结构本身，使画面沉静而完整。',
           palette: 'from-zinc-700/40 via-stone-100/10 to-sky-800/20',
+          image: '',
         },
         {
           title: '终章月白',
@@ -242,6 +254,7 @@
           phase: '晚期成熟与完成',
           desc: '系列接近完成时，月意从情节中退后，却统摄整套作品的回响。',
           palette: 'from-slate-900/45 via-slate-100/10 to-amber-500/20',
+          image: '',
         },
       ];
 
@@ -281,6 +294,32 @@
         return (
           <div ref={ref} className={`reveal ${className}`}>
             {children}
+          </div>
+        );
+      }
+
+
+      function ArtworkVisual({ image, title, palette, ratio = 'portrait', label = '作品图像占位' }) {
+        const [hasImage, setHasImage] = useState(Boolean(image));
+
+        useEffect(() => {
+          setHasImage(Boolean(image));
+        }, [image]);
+
+        return (
+          <div className={`art-image-shell art-image-${ratio} bg-gradient-to-br ${palette}`}>
+            {hasImage ? (
+              <img
+                src={image}
+                alt={title}
+                loading="lazy"
+                className="art-image"
+                onError={() => setHasImage(false)}
+              />
+            ) : null}
+            <div className={`art-image-fallback ${hasImage ? 'is-hidden' : ''}`} aria-hidden={hasImage}>
+              <span>{label}</span>
+            </div>
           </div>
         );
       }
@@ -414,6 +453,7 @@
                   <div className="timeline-track relative grid gap-6 md:grid-cols-4 md:gap-5">
                     {timelineData.map((phase, index) => {
                       const active = activePhase === index;
+                      const phaseWorkPreview = worksByPhase[index].find((work) => work.image) || worksByPhase[index][0];
                       return (
                         <button
                           key={phase.year}
@@ -445,8 +485,14 @@
                             <h3 className="mt-4 font-serif text-2xl text-moon">{phase.title}</h3>
                             <p className="mt-4 text-sm leading-7 text-moon/66">{phase.desc}</p>
                             <div className="mt-6 overflow-hidden rounded-[1.5rem] border border-moon/10 bg-gradient-to-br from-white/10 via-transparent to-haze/20 p-4">
-                              <div className="aspect-[4/3] rounded-[1.25rem] border border-dashed border-moon/15 bg-gradient-to-br from-moon/8 via-transparent to-gold/10" />
-                              <p className="mt-3 text-xs tracking-[0.25em] text-mist/60">阶段缩略图占位</p>
+                              <ArtworkVisual
+                                image={(worksByPhase[index].find((work) => work.image) || worksByPhase[index][0])?.image}
+                                title={`${phase.year} ${phase.title}`}
+                                palette={phaseWorkPreview?.palette || 'from-moon/8 via-transparent to-gold/10'}
+                                ratio="landscape"
+                                label="阶段缩略图占位"
+                              />
+                              <p className="mt-3 text-xs tracking-[0.25em] text-mist/60">{(worksByPhase[index].find((work) => work.image) || worksByPhase[index][0])?.image ? '阶段作品预览' : '阶段缩略图占位'}</p>
                             </div>
                           </div>
                         </button>
@@ -489,10 +535,8 @@
                         key={work.title}
                         className="group overflow-hidden rounded-[1.5rem] border border-paper/10 bg-white/[0.04] transition duration-500 hover:-translate-y-1 hover:border-gold/35 hover:bg-white/[0.06]"
                       >
-                        <div className={`aspect-[4/5] bg-gradient-to-br ${work.palette} p-4`}>
-                          <div className="flex h-full items-end rounded-[1.15rem] border border-moon/10 bg-black/10 p-4">
-                            <span className="text-[11px] uppercase tracking-[0.3em] text-moon/65">Image Placeholder</span>
-                          </div>
+                        <div className="p-4">
+                          <ArtworkVisual image={work.image} title={work.title} palette={work.palette} ratio="portrait" label="Image Placeholder" />
                         </div>
                         <div className="space-y-3 p-5">
                           <div className="flex items-center justify-between gap-3 text-xs uppercase tracking-[0.28em] text-mist/70">
@@ -513,10 +557,10 @@
                   <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
                     <div>
                       <p className="text-xs uppercase tracking-[0.35em] text-gold/90">Selected Works</p>
-                      <h2 className="mt-4 font-serif text-3xl md:text-5xl">12 幅精选作品占位</h2>
+                      <h2 className="mt-4 font-serif text-3xl md:text-5xl">12 幅精选作品</h2>
                     </div>
                     <p className="max-w-xl text-sm leading-7 text-moon/68 md:text-base">
-                      第一版先以 12 张占位卡片建立结构，后续可直接替换为真实作品图像与具体条目说明。
+                      首批卡片已接入 `images/moon100/` 中的本地图像；未命中的条目仍保留占位块，方便继续补充。
                     </p>
                   </div>
 
@@ -528,10 +572,8 @@
                           index % 5 === 0 ? 'xl:translate-y-8' : ''
                         } ${index % 5 === 3 ? 'xl:-translate-y-6' : ''}`}
                       >
-                        <div className={`aspect-[4/4.8] overflow-hidden bg-gradient-to-br ${work.palette} p-5`}>
-                          <div className="flex h-full items-end rounded-[1.4rem] border border-moon/10 bg-black/10 p-5 transition duration-500 group-hover:scale-[1.02] group-hover:border-moon/20">
-                            <span className="text-[11px] uppercase tracking-[0.3em] text-moon/68">作品图像占位</span>
-                          </div>
+                        <div className="p-5">
+                          <ArtworkVisual image={work.image} title={work.title} palette={work.palette} ratio="portrait" label="作品图像占位" />
                         </div>
                         <div className="space-y-3 p-6">
                           <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.28em] text-mist/70">
