@@ -132,6 +132,21 @@
     <script type="text/babel">
       const { useEffect, useMemo, useRef, useState } = React;
 
+      const IMAGE_BASE_PATH = 'images/moon100';
+      const IMAGE_REMOTE_BASES = [
+        'https://raw.githubusercontent.com/elaineli725/new-ukiyo-e-website/main/images/moon100',
+        'https://cdn.jsdelivr.net/gh/elaineli725/new-ukiyo-e-website@main/images/moon100',
+      ];
+
+      function buildImageSources(fileName) {
+        if (!fileName) return [];
+        const encodedName = encodeURIComponent(fileName);
+        return [
+          `${IMAGE_BASE_PATH}/${fileName}`,
+          ...IMAGE_REMOTE_BASES.map((base) => `${base}/${encodedName}`),
+        ];
+      }
+
       const timelineData = [
         {
           year: '1885',
@@ -166,7 +181,7 @@
           phase: '初刊与开场',
           desc: '月光在人物与空白之间停留，像为整套系列先行定下呼吸。',
           palette: 'from-slate-500/40 via-zinc-300/10 to-amber-700/20',
-          image: 'images/moon100/moon (1).png',
+          image: 'moon (1).png',
         },
         {
           title: '桥畔闻笛',
@@ -174,7 +189,7 @@
           phase: '初刊与开场',
           desc: '开场阶段的抒情场景更强调距离感，让观看先慢下来。',
           palette: 'from-indigo-500/35 via-slate-200/10 to-rose-900/20',
-          image: 'images/moon100/moon (2).png',
+          image: 'moon (2).png',
         },
         {
           title: '夜航之月',
@@ -182,7 +197,7 @@
           phase: '初刊与开场',
           desc: '水面与夜色相接，人物几乎被月意本身吞没。',
           palette: 'from-slate-700/40 via-stone-300/10 to-sky-700/20',
-          image: 'images/moon100/moon (3).png',
+          image: 'moon (3).png',
         },
         {
           title: '殿上秋思',
@@ -190,7 +205,7 @@
           phase: '系列展开',
           desc: '历史人物与抒情氛围开始并置，观看路径由此变得更丰富。',
           palette: 'from-zinc-500/35 via-slate-100/10 to-amber-600/20',
-          image: 'images/moon100/moon (4).png',
+          image: 'moon (4).png',
         },
         {
           title: '月下旅人',
@@ -198,7 +213,7 @@
           phase: '系列展开',
           desc: '旅人形象为系列引入漂泊感，月不只是照明，也是路途。',
           palette: 'from-sky-700/30 via-slate-100/10 to-zinc-900/25',
-          image: 'images/moon100/moon (5).png',
+          image: 'moon (5).png',
         },
         {
           title: '镜前迟照',
@@ -206,7 +221,7 @@
           phase: '系列展开',
           desc: '女性与月光并置时，情绪更多来自停顿而非叙事高潮。',
           palette: 'from-rose-700/30 via-stone-100/10 to-slate-800/25',
-          image: 'images/moon100/moon (6).png',
+          image: 'moon (6).png',
         },
         {
           title: '古战场残月',
@@ -214,7 +229,7 @@
           phase: '人物群像渐丰',
           desc: '历史题材开始与夜色发生更强烈的心理张力。',
           palette: 'from-slate-900/45 via-stone-100/5 to-amber-700/25',
-          image: 'images/moon100/moon (7).png',
+          image: 'moon (7).png',
         },
         {
           title: '幽庭微明',
@@ -222,7 +237,7 @@
           phase: '人物群像渐丰',
           desc: '幽灵与庭院并非为了惊吓，而是为了让月光显得更冷。',
           palette: 'from-cyan-700/25 via-slate-100/10 to-zinc-900/30',
-          image: 'images/moon100/moon (8).png',
+          image: 'moon (8).png',
         },
         {
           title: '宫人与雪月',
@@ -230,7 +245,7 @@
           phase: '人物群像渐丰',
           desc: '女性形象、季节性气候与抒情留白在这一阶段更加成熟。',
           palette: 'from-slate-500/25 via-stone-100/10 to-rose-800/20',
-          image: 'images/moon100/moon (9).png',
+          image: 'moon (9).png',
         },
         {
           title: '孤舟终夜',
@@ -238,7 +253,7 @@
           phase: '晚期成熟与完成',
           desc: '晚期作品的叙事更收束，留给观者更多自行补写的空间。',
           palette: 'from-slate-800/45 via-slate-100/5 to-indigo-900/30',
-          image: 'images/moon100/moon (10).png',
+          image: 'moon (10).png',
         },
         {
           title: '霜庭之影',
@@ -246,7 +261,7 @@
           phase: '晚期成熟与完成',
           desc: '成熟期的月色更像结构本身，使画面沉静而完整。',
           palette: 'from-zinc-700/40 via-stone-100/10 to-sky-800/20',
-          image: 'images/moon100/moon (11).png',
+          image: 'moon (11).png',
         },
         {
           title: '终章月白',
@@ -254,7 +269,7 @@
           phase: '晚期成熟与完成',
           desc: '系列接近完成时，月意从情节中退后，却统摄整套作品的回响。',
           palette: 'from-slate-900/45 via-slate-100/10 to-amber-500/20',
-          image: 'images/moon100/moon (12).png',
+          image: 'moon (12).png',
         },
       ];
 
@@ -300,21 +315,25 @@
 
 
       function ArtworkVisual({ image, title, palette, ratio = 'portrait', label = '作品图像占位' }) {
-        const [hasImage, setHasImage] = useState(Boolean(image));
+        const sources = useMemo(() => buildImageSources(image), [image]);
+        const [sourceIndex, setSourceIndex] = useState(0);
 
         useEffect(() => {
-          setHasImage(Boolean(image));
+          setSourceIndex(0);
         }, [image]);
+
+        const currentSource = sources[sourceIndex] || null;
+        const hasImage = Boolean(currentSource);
 
         return (
           <div className={`art-image-shell art-image-${ratio} bg-gradient-to-br ${palette}`}>
             {hasImage ? (
               <img
-                src={encodeURI(image)}
+                src={currentSource}
                 alt={title}
                 loading="lazy"
                 className="art-image"
-                onError={() => setHasImage(false)}
+                onError={() => setSourceIndex((index) => index + 1)}
               />
             ) : null}
             <div className={`art-image-fallback ${hasImage ? 'is-hidden' : ''}`} aria-hidden={hasImage}>
@@ -560,7 +579,7 @@
                       <h2 className="mt-4 font-serif text-3xl md:text-5xl">12 幅精选作品</h2>
                     </div>
                     <p className="max-w-xl text-sm leading-7 text-moon/68 md:text-base">
-                      首批卡片现已接入 `images/moon100/` 里的真实 PNG 图像；若后续还有未补齐条目，仍会自动回退到占位块。
+                      首批卡片会先尝试加载站内 `images/moon100/` 图像；如果当前分支或部署环境暂时拿不到本地图，则会继续尝试 GitHub 主分支图源，仍失败时再回退到占位块。
                     </p>
                   </div>
 
